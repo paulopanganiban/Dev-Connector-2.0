@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://paulopanganiban:asdasddsa@cluster-bbycc.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "mysecrettoken"
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "459884810eb27210bca5",
+    "githubSecret":"52dcc660c9722c3faf2ef07a67eedbeff6dd9a4f"
 }
