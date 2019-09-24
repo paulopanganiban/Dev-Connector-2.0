@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // PARA MAGAMIT NG COMPONENT YUNG REDUCER WE USE REDUX
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 // now we can use props ng setalert dahil sa connect sa baba!
 import PropTypes from 'prop-types'
 
@@ -50,6 +51,7 @@ const Register = (props) => {
             // } catch (error) {
             //     console.error(error.message)
             // }
+            props.register({ name, email, password });
         }
     }
     return (
@@ -64,7 +66,7 @@ const Register = (props) => {
                         type="text"
                         placeholder="Name"
                         name="name"
-                        required
+
                     />
                 </div>
                 <div className="form-group">
@@ -73,7 +75,7 @@ const Register = (props) => {
                         type="email"
                         placeholder="Email Address"
                         name="email"
-                        required
+
                     />
                     <small className="form-text">
                         This site uses Gravatar so if you want a profile image, use a
@@ -86,7 +88,6 @@ const Register = (props) => {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        minLength="6"
                     />
                 </div>
                 <div className="form-group">
@@ -109,9 +110,10 @@ const Register = (props) => {
 }
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
 };
 //Register is the name of the component
 // bring the action via import
 // CONNECT TAKES 2 PARAMETERS: THE STATE(1), OBJECT WE WANNA USE(2) STATE YOU WANNA MAP 
-export default connect(null, { setAlert })(Register)
+export default connect(null, { setAlert, register })(Register)
 // we can access now using the 'props'
