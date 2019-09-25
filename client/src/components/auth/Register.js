@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 // PARA MAGAMIT NG COMPONENT YUNG REDUCER WE USE REDUX
-import { setAlert } from '../../actions/alert';
-import { register } from '../../actions/auth';
+import { setAlert } from '../../_actions/alert';
+import { register } from '../../_actions/auth';
 // now we can use props ng setalert dahil sa connect sa baba!
 import PropTypes from 'prop-types'
 
 // destrcutre para di na need ng props.setAlert
 // pero gamitin natin props LOL
 // pwedeng ({setAlert})
-const Register = (props) => {
+const Register = ({setAlert, register, isAuthenticated}) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -30,7 +30,7 @@ const Register = (props) => {
     const onSubmit = async e => {
         e.preventDefault();
         if (password !== password2) {
-            props.setAlert('Passwords do not match', 'danger')
+            setAlert('Passwords do not match', 'danger')
         } else {
             // const newUser = {
             //     name,
@@ -51,8 +51,11 @@ const Register = (props) => {
             // } catch (error) {
             //     console.error(error.message)
             // }
-            props.register({ name, email, password });
+            register({ name, email, password });
         }
+    }
+    if( isAuthenticated ) {
+        return <Redirect to="/dashboard" />
     }
     return (
         <Fragment>
@@ -111,9 +114,13 @@ const Register = (props) => {
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 };
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
 //Register is the name of the component
 // bring the action via import
 // CONNECT TAKES 2 PARAMETERS: THE STATE(1), OBJECT WE WANNA USE(2) STATE YOU WANNA MAP 
-export default connect(null, { setAlert, register })(Register)
+export default connect(mapStateToProps, { setAlert, register })(Register)
 // we can access now using the 'props'

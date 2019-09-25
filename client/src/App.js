@@ -10,7 +10,7 @@ import setAuthToken from './utils/setAuthToken';
 //REDUX
 import { Provider } from 'react-redux';
 import store from './store';
-import { loadUser } from './actions/auth';
+import { loadUser } from './_actions/auth';
 import './App.css';
 // const App = () => { return (<div className="App">...); }
 if (localStorage.token) {
