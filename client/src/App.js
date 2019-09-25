@@ -5,6 +5,8 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Alert from './components/layout/Alert';
 import Login from './components/auth/Login';
+import PrivateRoute from './components/routing/PrivateRoute';
+import Dashboard from './components/dashboard/Dashboard';
 import Register from './components/auth/Register';
 import setAuthToken from './utils/setAuthToken';
 //REDUX
@@ -27,10 +29,10 @@ function App() {
           <Navbar />
           <Route exact path="/" component={Landing} />
           <section className="container">
-
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Alert />
           </section>
