@@ -9,6 +9,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import Register from './components/auth/Register';
 import setAuthToken from './utils/setAuthToken';
+//ANTD
 //REDUX
 import { Provider } from 'react-redux';
 import store from './store';

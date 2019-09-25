@@ -1,4 +1,5 @@
 /* Global Styles */
+@import '~antd/dist/antd.css';
 :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
