@@ -1,5 +1,5 @@
 /* Global Styles */
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
@@ -13,9 +13,24 @@
   margin: 0;
   padding: 0;
 }
-
+@media screen and (max-width: 330px) {
+  .OLOCUSTOMBITCH {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 500px) {
+  .OLOCUSTOMBITCH {
+    width: 70%;
+  }
+}
+@media screen and (min-width: 850px) {
+  .OLOCUSTOMBITCH {
+    margin: auto;
+    width: 60%;
+  }
+}
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -246,10 +261,10 @@ img {
   color: #888;
 }
 
-.form input[type='text'],
-.form input[type='email'],
-.form input[type='password'],
-.form input[type='date'],
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="date"],
 .form select,
 .form textarea {
   display: block;
@@ -259,7 +274,7 @@ img {
   border: 1px solid #ccc;
 }
 
-.form input[type='submit'],
+.form input[type="submit"],
 button {
   font: inherit;
 }
@@ -334,7 +349,7 @@ button {
 /* Landing Page */
 .landing {
   position: relative;
-  background: url('./img/showcase.jpg') no-repeat center center/cover;
+  background: url("./img/showcase.jpg") no-repeat center center/cover;
   height: 100vh;
 }
 
@@ -365,10 +380,10 @@ button {
 .profile-grid {
   display: grid;
   grid-template-areas:
-    'top top'
-    'about about'
-    'exp edu'
-    'github github';
+    "top top"
+    "about about"
+    "exp edu"
+    "github github";
   grid-gap: 1rem;
 }
 
@@ -551,11 +566,11 @@ button {
 
   .profile-grid {
     grid-template-areas:
-      'top'
-      'about'
-      'exp'
-      'edu'
-      'github';
+      "top"
+      "about"
+      "exp"
+      "edu"
+      "github";
   }
 
   .profile-about .skills {
