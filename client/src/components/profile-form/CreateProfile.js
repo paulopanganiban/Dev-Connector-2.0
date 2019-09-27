@@ -1,21 +1,24 @@
-import React, { useState, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    Form,
-    Input,
-    Tooltip,
-    Icon,
-    Cascader,
-    Select,
-    Row,
-    Col,
-    Checkbox,
-    Button,
-    AutoComplete,
-} from 'antd';
-const { Option } = Select;
-const CreateProfile = props => {
+import { Form, Icon, Input, Button, Checkbox, Select, } from 'antd';
+
+const { TextArea } = Input;
+
+function CreateProfile(props) {
+    // ANTDESIGN METHODS
+
+    const [displaySocialInputs, toggleSocialInputs] = useState(false);
+    const { getFieldDecorator } = props.form;
+    const handleSubmit = e => {
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
+    
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -26,12 +29,11 @@ const CreateProfile = props => {
         bio: '',
         twitter: '',
         facebook: '',
-        linkedIn: '',
+        linkedin: '',
         youtube: '',
         instagram: '',
-
     });
-
+    // destructure
     const {
         company,
         website,
@@ -42,153 +44,185 @@ const CreateProfile = props => {
         bio,
         twitter,
         facebook,
-        linkedIn,
+        linkedin,
         youtube,
-        instagram,
+        instagram
     } = formData;
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-    const [displaySocialInputs, toggleSocialInputs] = useState(false);
-    const { getFieldDecorator } = this.props.form;
+
+    const { Option } = Select;
     return (
-
         <Fragment>
-            <h1 className="large text-primary">
-                Create Your Profile
-      </h1>
-            <p className="lead">
-                <i className="fas fa-user"></i> Let's get some information to make your
-                profile stand out
-      </p>
-            <small>* = required field</small>
+            <Form onSubmit={handleSubmit} className="login-form">
+                <Form.Item label="Status">
+                    <small className="form-text">Give us an idea of where you are at in your career</small>
 
-            <div className="OLOCUSTOMBITCH">
-                {/*  onChange={e => onChange(e)} */}
-                <Form>
-                    <Form.Item>
-                        <Select defaultValue="0" value={status}>
-                            <Option value="0">* Select Professional Status</Option>
-                            <Option value="Developer">Developer</Option>
-                            <Option value="Junior Developer">Junior Developer</Option>
-                            <Option value="Senior Developer">Senior Developer</Option>
-                            <Option value="Manager">Manager</Option>
-                            <Option value="Student or Learning">Student or Learning</Option>
-                            <Option value="Instructor">Instructor or Teacher</Option>
-                            <Option value="Intern">Intern</Option>
-                            <Option value="Other">Other</Option>
-                        </Select>
-                        <small className="form-text"
-                        >Give us an idea of where you are at in your career</small
-                        >
-
-
-                    </Form.Item>
-
-                    <Form.Item>
+                    {getFieldDecorator('status', {
+                        initialValue: '0',
+                        rules: [{ required: true, message: 'Required field' }],
+                    })(<Select>
+                        <Option value="0">* Select Professional Status</Option>
+                        <Option value="Developer">Developer</Option>
+                        <Option value="Junior Developer">Junior Developer</Option>
+                        <Option value="Senior Developer">Senior Developer</Option>
+                        <Option value="Manager">Manager</Option>
+                        <Option value="Student or Learning">Student or Learning</Option>
+                        <Option value="Instructor">Instructor or Teacher</Option>
+                        <Option value="Intern">Intern</Option>
+                        <Option value="Other">Other</Option>
+                    </Select>
+                    )}
+                </Form.Item>
+                <small className="form-text">Could be your own company or one you work for</small>
+                <Form.Item>
+                    {getFieldDecorator('company', {
+                        rules: [{ required: true, message: 'Company' }],
+                    })(
                         <Input
-                            prefix={<Icon type="code" theme="twoTone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Company"
-                        />
-                        <small className="form-text"
-                        >Could be your own company or one you work for</small
-                        >
-                    </Form.Item>
+                        />,
+                    )}
+                </Form.Item>
 
-                    <Form.Item>
+                <small className="form-text">Could be your own or a company website</small>
+                <Form.Item>
+                    {getFieldDecorator('website', {
+                    })(
                         <Input
-                            prefix={<Icon type="layout" theme="twoTone" />}
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Website"
-                        />
-                        <small className="form-text"
-                        >Could be your own or a company website</small
-                        >
-                    </Form.Item>
+                        />,
+                    )}
+                </Form.Item>
 
-
-                    <Form.Item>
+                <small class="form-text">City & state suggested (eg. Boston, MA)</small >
+                <Form.Item>
+                    {getFieldDecorator('location', {
+                    })(
                         <Input
-                            prefix={<Icon type="build" theme="twoTone" />}
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Location"
-                        />
-                        <small className="form-text"
-                        >City & state suggested (eg. Boston, MA)</small
-                        >
-                    </Form.Item>
+                        />,
+                    )}
+                </Form.Item>
 
-                    <Form.Item>
+                <small class="form-text">Please use comma separated values (eg.
+                HTML,CSS,JavaScript,PHP)</small>
+                <Form.Item>
+                    {getFieldDecorator('skills', {
+                        rules: [{ required: true, message: 'Enter skills' }],
+                    })(
                         <Input
-                            prefix={<Icon type="code" theme="twoTone" />}
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Skills"
-                        />
-                        <small className="form-text"
-                        >Please use comma separated values (eg.
-            HTML,CSS,JavaScript,PHP)</small
-                        >
+                        />,
+                    )}
+                </Form.Item>
 
-                    </Form.Item>
-                    <Form.Item>
+
+                <small class="form-text">If you want your latest repos and a Github link, include your
+                username</small>
+                <Form.Item>
+                    {getFieldDecorator('githubusername', {
+                    })(
                         <Input
-                            prefix={<Icon type="code" theme="twoTone" />}
-                            placeholder="Github"
-                        />
-                        <small className="form-text"
-                        >If you want your latest repos and a Github link, include your
-            username</small
-                        >
-                    </Form.Item>
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Github Username"
+                        />,
+                    )}
+                </Form.Item>
 
-                    <Form.Item>
-                        <Input
-                            prefix={<Icon type="code" theme="twoTone" />}
-                            placeholder="Bio"
-                        />
-                        <small className="form-text">Tell us a little about yourself</small>
-                    </Form.Item>
+                <Form.Item>
 
-                    <div className="my-2">
-                        <Button onClick={() => toggleSocialInputs(!displaySocialInputs)} type="dashed">Add Social Network Links</Button>
-                        <span style={{ marginLeft: '1em' }}>Optional</span>
+                    <small>Tell us a little about yourself</small>
+                </Form.Item>
+                {getFieldDecorator('bio', {
+                })(
+                    <TextArea
+                        placeholder="Enter your bio"
+                        autosize={{ minRows: 2, maxRows: 6 }}
+                    />
+                )}
+
+
+                <div class="my-2">
+                    <Button size="large" onClick={() => toggleSocialInputs(!displaySocialInputs)} style={{ marginRight: '5px' }}>
+                        Add Social Network Links
+                </Button>
+                    <span>Optional</span>
+                </div>
+                {displaySocialInputs && <Fragment>
+                    <div class="form-group social-input">
+                        <i class="fab fa-twitter fa-2x"></i>
+                        <Form.Item>
+                            {getFieldDecorator('twitter', {
+                            })(
+                                <Input
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="twitter url"
+                                />,
+                            )}
+                        </Form.Item>
                     </div>
-                    {displaySocialInputs && <Fragment>
-                        <Form.Item>
-                            <Input
-                                prefix={<Icon type="twitter" />}
-                                placeholder="Twitter URL"
-                            />
 
-                        </Form.Item>
+                    <div class="form-group social-input">
+                        <i class="fab fa-facebook fa-2x"></i>
                         <Form.Item>
-                            <Input
-                                prefix={<Icon type="facebook" />}
-                                placeholder="Facebook URL"
-                            />
-
+                            {getFieldDecorator('facebook', {
+                            })(
+                                <Input
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="facebook url"
+                                />,
+                            )}
                         </Form.Item>
+                    </div>
+
+                    <div class="form-group social-input">
+                        <i class="fab fa-youtube fa-2x"></i>
                         <Form.Item>
-                            <Input
-                                prefix={<Icon type="youtube" />}
-                                placeholder="Youtube URL"
-                            />
-
+                            {getFieldDecorator('youtube', {
+                            })(
+                                <Input
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="youtube url"
+                                />,
+                            )}
                         </Form.Item>
+                    </div>
+
+                    <div class="form-group social-input">
+                        <i class="fab fa-linkedin fa-2x"></i>
                         <Form.Item>
-                            <Input
-                                prefix={<Icon type="linkedin" />}
-                                placeholder="LinkedIn URL"
-                            />
-
+                            {getFieldDecorator('linkedin', {
+                            })(
+                                <Input
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="linkedin url"
+                                />,
+                            )}
                         </Form.Item>
+                    </div>
+
+                    <div class="form-group social-input">
+                        <i class="fab fa-instagram fa-2x"></i>
                         <Form.Item>
-                            <Input
-                                prefix={<Icon type="instagram" />}
-                                placeholder="Instagram URL"
-                            />
-
+                            {getFieldDecorator('instagram', {
+                            })(
+                                <Input
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="instagram url"
+                                />,
+                            )}
                         </Form.Item>
-                    </Fragment>}
-                </Form>
-                <Button type="primary">Submit</Button>
-                <Button style={{ marginLeft: '2px' }}>Go Back</Button>
-            </div>
+                    </div>
+
+                </Fragment>}
+
+
+                <Button type="primary" style={{ marginRight: '5px' }} htmlType="submit">Submit</Button>
+                <Button>Go back</Button>
+            </Form>
         </Fragment>
     )
 }
@@ -196,5 +230,6 @@ const CreateProfile = props => {
 CreateProfile.propTypes = {
 
 }
-
-export default CreateProfile
+// important to
+const CreateProfileForm = Form.create()(CreateProfile);
+export default CreateProfileForm
