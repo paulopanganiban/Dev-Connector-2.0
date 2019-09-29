@@ -26,5 +26,8 @@ module.exports = {
     "linebreak-style": "off",
     "no-unused-vars": "warn",
     "react/jsx-filename-extension": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/self-closing-comp": "off",
   },
 };

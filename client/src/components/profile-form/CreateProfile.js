@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-wrap-multilines */
+/* eslint-disable react/jsx-closing-tag-location */
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Select, } from 'antd';
+import { Form, Icon, Input, Button, Select, } from 'antd';
 
 const { TextArea } = Input;
 
@@ -9,7 +10,7 @@ function CreateProfile(props) {
     // ANTDESIGN METHODS
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
-    const { getFieldDecorator } = props.form;
+    const { getFieldDecorator } = props;
     const handleSubmit = e => {
         e.preventDefault();
         props.form.validateFields((err, values) => {
@@ -18,37 +19,6 @@ function CreateProfile(props) {
             }
         });
     };
-    
-    const [formData, setFormData] = useState({
-        company: '',
-        website: '',
-        location: '',
-        status: '',
-        skills: '',
-        githubusername: '',
-        bio: '',
-        twitter: '',
-        facebook: '',
-        linkedin: '',
-        youtube: '',
-        instagram: '',
-    });
-    // destructure
-    const {
-        company,
-        website,
-        location,
-        status,
-        skills,
-        githubusername,
-        bio,
-        twitter,
-        facebook,
-        linkedin,
-        youtube,
-        instagram
-    } = formData;
-
     const { Option } = Select;
     return (
         <Fragment>
@@ -95,7 +65,7 @@ function CreateProfile(props) {
                     )}
                 </Form.Item>
 
-                <small class="form-text">City & state suggested (eg. Boston, MA)</small >
+                <small className="form-text">City & state suggested (eg. Boston, MA)</small>
                 <Form.Item>
                     {getFieldDecorator('location', {
                     })(
@@ -106,8 +76,7 @@ function CreateProfile(props) {
                     )}
                 </Form.Item>
 
-                <small class="form-text">Please use comma separated values (eg.
-                HTML,CSS,JavaScript,PHP)</small>
+                <small className="form-text">Please use comma separated values (eg.  HTML,CSS,JavaScript,PHP)</small>
                 <Form.Item>
                     {getFieldDecorator('skills', {
                         rules: [{ required: true, message: 'Enter skills' }],
@@ -120,8 +89,7 @@ function CreateProfile(props) {
                 </Form.Item>
 
 
-                <small class="form-text">If you want your latest repos and a Github link, include your
-                username</small>
+                <small className="form-text">If you want your latest repos and a Github link, include yourusername</small>
                 <Form.Item>
                     {getFieldDecorator('githubusername', {
                     })(
@@ -145,15 +113,15 @@ function CreateProfile(props) {
                 )}
 
 
-                <div class="my-2">
+                <div className="my-2">
                     <Button size="large" onClick={() => toggleSocialInputs(!displaySocialInputs)} style={{ marginRight: '5px' }}>
                         Add Social Network Links
-                </Button>
+                    </Button>
                     <span>Optional</span>
                 </div>
                 {displaySocialInputs && <Fragment>
-                    <div class="form-group social-input">
-                        <i class="fab fa-twitter fa-2x"></i>
+                    <div className="form-group social-input">
+                        <i className="fab fa-twitter fa-2x"></i>
                         <Form.Item>
                             {getFieldDecorator('twitter', {
                             })(
@@ -165,8 +133,8 @@ function CreateProfile(props) {
                         </Form.Item>
                     </div>
 
-                    <div class="form-group social-input">
-                        <i class="fab fa-facebook fa-2x"></i>
+                    <div className="form-group social-input">
+                        <i className="fab fa-facebook fa-2x"></i>
                         <Form.Item>
                             {getFieldDecorator('facebook', {
                             })(
@@ -178,8 +146,8 @@ function CreateProfile(props) {
                         </Form.Item>
                     </div>
 
-                    <div class="form-group social-input">
-                        <i class="fab fa-youtube fa-2x"></i>
+                    <div className="form-group social-input">
+                        <i className="fab fa-youtube fa-2x"></i>
                         <Form.Item>
                             {getFieldDecorator('youtube', {
                             })(
@@ -191,8 +159,8 @@ function CreateProfile(props) {
                         </Form.Item>
                     </div>
 
-                    <div class="form-group social-input">
-                        <i class="fab fa-linkedin fa-2x"></i>
+                    <div className="form-group social-input">
+                        <i className="fab fa-linkedin fa-2x"></i>
                         <Form.Item>
                             {getFieldDecorator('linkedin', {
                             })(
@@ -204,8 +172,8 @@ function CreateProfile(props) {
                         </Form.Item>
                     </div>
 
-                    <div class="form-group social-input">
-                        <i class="fab fa-instagram fa-2x"></i>
+                    <div className="form-group social-input">
+                        <i className="fab fa-instagram fa-2x"></i>
                         <Form.Item>
                             {getFieldDecorator('instagram', {
                             })(
@@ -228,7 +196,8 @@ function CreateProfile(props) {
 }
 
 CreateProfile.propTypes = {
-
+    getFieldDecorator: PropTypes.string.isRequired,
+    form: PropTypes.shape.isRequired,
 }
 // important to
 const CreateProfileForm = Form.create()(CreateProfile);
